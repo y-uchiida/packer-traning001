@@ -69,4 +69,9 @@ build {
   sources = [
     "source.amazon-ebs.app-svr-ami"
   ]
+
+  provisioner "file" {
+    source      = "../data/tastylog_light-1.0.0.tar.gz"
+    destination = "/tmp/"
+  }
 }
