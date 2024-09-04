@@ -58,8 +58,10 @@ source "amazon-ebs" "app-svr-ami" {
   ssh_interface        = "public_ip"                   # 接続先のIPアドレスを指定
 
   tags = {
-    Name    = "${local.project}-app-ami"
-    Version = var.version
+    Name          = "${local.project}-app-ami"
+    Version       = var.version
+    SourceAmiID   = "{{.SourceAMI}}"
+    SourceAmiName = "{{.SourceAMIName}}"
   }
 }
 
