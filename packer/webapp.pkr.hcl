@@ -6,7 +6,15 @@ source "amazon-ebs" "app-svr-ami" {
   profile = "nirneege"
 
   # ソースAMI
-  source_ami = "ami-031ff5a575101728a"
+  source_ami_filter {
+    filters = {
+      name                = "amzn2-ami-hvm-2.0.*-x86_64-gp2"
+      root-device-type    = "ebs"
+      virtualization-type = "hvm"
+    }
+    most_recent = true
+    owners      = ["amazon"]
+  }
 
   # インスタンスタイプ
   instance_type = "t2.micro"
