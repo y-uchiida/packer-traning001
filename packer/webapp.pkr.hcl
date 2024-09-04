@@ -1,5 +1,14 @@
+locals {
+  project = "tastylog"
+}
+
+variable "version" {
+  type    = string
+  default = "1.0.0"
+}
+
 source "amazon-ebs" "app-svr-ami" {
-  ami_name = "webapp-{{timestamp}}"
+  ami_name = "${local.project}-webapp-${var.version}-{{timestamp}}"
 
   # Packer がAWSにアクセスするための認証情報を設定
   region  = "ap-northeast-1"
@@ -49,7 +58,8 @@ source "amazon-ebs" "app-svr-ami" {
   ssh_interface        = "public_ip"                   # 接続先のIPアドレスを指定
 
   tags = {
-    Name = "tastylog-app-ami"
+    Name    = "${local.project}-app-ami"
+    Version = var.version
   }
 }
 
