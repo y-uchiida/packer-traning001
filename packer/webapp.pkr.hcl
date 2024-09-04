@@ -1,5 +1,6 @@
 locals {
   project = "tastylog"
+	timestamp = formatdate("YYYYMMDDhhmmss", timestamp())
 }
 
 variable "version" {
@@ -62,6 +63,7 @@ source "amazon-ebs" "app-svr-ami" {
     Version       = var.version
     SourceAmiID   = "{{.SourceAMI}}"
     SourceAmiName = "{{.SourceAMIName}}"
+		CreatedAt     = "${local.timestamp}"
   }
 }
 
